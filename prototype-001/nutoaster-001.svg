@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900">
+  <defs>
+    <style>
+      .bg{fill:#f7f5ef}
+      .ink{stroke:#222;stroke-width:5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+      .thin{stroke:#555;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+      .heat{stroke:#b8421d;stroke-width:10;fill:none;stroke-linecap:round}
+      .tray{fill:#d8d8d3;stroke:#222;stroke-width:4}
+      .steel{fill:#b9bbb7;stroke:#222;stroke-width:4}
+      .food{fill:#c28a53;stroke:#222;stroke-width:3}
+      .spring{stroke:#333;stroke-width:3;fill:none}
+      .arrow{stroke:#226b45;stroke-width:5;fill:none;marker-end:url(#arrow)}
+      .label{font-family:Arial,Helvetica,sans-serif;font-size:25px;fill:#222}
+      .small{font-family:Arial,Helvetica,sans-serif;font-size:20px;fill:#333}
+      .title{font-family:Arial,Helvetica,sans-serif;font-size:42px;font-weight:700;fill:#111}
+      .subtitle{font-family:Arial,Helvetica,sans-serif;font-size:25px;font-weight:700;fill:#333}
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#226b45"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" width="1400" height="900"/>
+  <text class="title" x="55" y="65">NuToaster — Prototype 001</text>
+  <text class="label" x="57" y="102">two removable 45° cooking troughs • fixed surrounding heat • optional spring compression</text>
+
+  <!-- SIDE CUTAWAY -->
+  <text class="subtitle" x="55" y="160">A. SIDE CUTAWAY — ONE BAY</text>
+  <path class="steel" d="M80 480 L80 215 Q80 190 105 190 L590 190 Q620 190 635 215 L700 480 Z"/>
+  <path class="heat" d="M150 430 L500 235"/>
+  <path class="heat" d="M205 470 L555 275"/>
+  <g transform="rotate(-29 380 350)">
+    <rect class="tray" x="205" y="285" width="390" height="130" rx="12"/>
+    <rect class="food" x="285" y="318" width="220" height="64" rx="25"/>
+    <line class="thin" x1="230" y1="295" x2="230" y2="405"/>
+    <line class="thin" x1="570" y1="295" x2="570" y2="405"/>
+  </g>
+  <path class="ink" d="M145 480 L515 270"/>
+  <text class="small" x="470" y="455">~45° loading axis</text>
+
+  <!-- spring rods -->
+  <path class="spring" d="M245 305 q15 -15 30 0 q15 15 30 0 q15 -15 30 0"/>
+  <path class="spring" d="M500 235 q15 -15 30 0 q15 15 30 0 q15 -15 30 0"/>
+  <text class="small" x="85" y="535">Fixed chassis carries heating coils. Removable trough is the dirty food-contact vessel.</text>
+
+  <!-- CROSS SECTION -->
+  <text class="subtitle" x="760" y="160">B. FRONT CROSS-SECTION — BOTH BAYS</text>
+  <rect class="steel" x="770" y="200" width="575" height="315" rx="30"/>
+  <rect x="805" y="225" width="225" height="260" rx="18" class="tray"/>
+  <rect x="1085" y="225" width="225" height="260" rx="18" class="tray"/>
+  <rect x="1040" y="210" width="35" height="290" class="steel"/>
+  <line class="heat" x1="790" y1="245" x2="790" y2="465"/>
+  <line class="heat" x1="1057" y1="245" x2="1057" y2="465"/>
+  <line class="heat" x1="1325" y1="245" x2="1325" y2="465"/>
+
+  <!-- movable inner walls -->
+  <line class="ink" x1="840" y1="245" x2="855" y2="465"/>
+  <line class="ink" x1="995" y1="245" x2="980" y2="465"/>
+  <line class="ink" x1="1120" y1="245" x2="1135" y2="465"/>
+  <line class="ink" x1="1275" y1="245" x2="1260" y2="465"/>
+
+  <!-- compression arrows -->
+  <line class="arrow" x1="875" y1="355" x2="920" y2="355"/>
+  <line class="arrow" x1="960" y1="355" x2="925" y2="355"/>
+  <line class="arrow" x1="1155" y1="355" x2="1200" y2="355"/>
+  <line class="arrow" x1="1240" y1="355" x2="1205" y2="355"/>
+
+  <text class="small" x="818" y="550">outer heat</text>
+  <text class="small" x="1010" y="575">heated center divider</text>
+  <text class="small" x="1230" y="550">outer heat</text>
+  <text class="small" x="865" y="515">LEFT TROUGH</text>
+  <text class="small" x="1140" y="515">RIGHT TROUGH</text>
+
+  <!-- REMOVAL DETAIL -->
+  <text class="subtitle" x="55" y="635">C. REMOVABLE TROUGH + PRESSURE MODE</text>
+  <g transform="translate(70 670)">
+    <rect class="tray" x="0" y="0" width="500" height="125" rx="10"/>
+    <line class="ink" x1="60" y1="15" x2="70" y2="110"/>
+    <line class="ink" x1="440" y1="15" x2="430" y2="110"/>
+    <path class="spring" d="M25 25 q10 -12 20 0 q10 12 20 0 q10 -12 20 0"/>
+    <path class="spring" d="M415 25 q10 -12 20 0 q10 12 20 0 q10 -12 20 0"/>
+    <line class="arrow" x1="115" y1="60" x2="195" y2="60"/>
+    <line class="arrow" x1="385" y1="60" x2="305" y2="60"/>
+    <text class="small" x="155" y="98">walls move inward</text>
+  </g>
+  <text class="small" x="70" y="835">Compression settings: OFF / LOW / MEDIUM / HIGH. OFF leaves the trough open for foods that should not be pressed.</text>
+
+  <!-- MODES -->
+  <text class="subtitle" x="760" y="635">D. PROTOTYPE CONTROL IDEA</text>
+  <rect x="790" y="675" width="500" height="150" rx="18" class="steel"/>
+  <text class="label" x="825" y="720">HEAT</text>
+  <text class="label" x="975" y="720">PRESS</text>
+  <text class="label" x="1145" y="720">TIME</text>
+  <circle cx="860" cy="770" r="32" class="tray"/>
+  <rect x="1008" y="742" width="30" height="58" rx="8" class="tray"/>
+  <circle cx="1190" cy="770" r="32" class="tray"/>
+  <text class="small" x="955" y="855">Pressure is a selectable behavior, not the default identity of the cooker.</text>
+
+  <!-- Callout -->
+  <text class="small" x="800" y="600">Fixed: heater chassis. Removable: trough. Adjustable: wall pressure.</text>
+</svg>
