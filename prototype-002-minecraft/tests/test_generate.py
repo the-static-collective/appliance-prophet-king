@@ -82,6 +82,20 @@ class NuToasterCartridgeTests(unittest.TestCase):
             self.assertEqual(pack['pack']['max_format'],[101,0])
             self.assertEqual(json.loads(z.read('SOURCE_CONCEPT.json'))['voxel_count'],len(self.m.blocks))
 
+    def test_legacy_java_1_20_1_format(self):
+        package=g.make_datapack(self.m,'1.20.1')
+        with zipfile.ZipFile(io.BytesIO(package)) as z:
+            paths=set(z.namelist())
+            self.assertIn('data/nutoaster/functions/build.mcfunction',paths)
+            self.assertNotIn('data/nutoaster/function/build.mcfunction',paths)
+            pack=json.loads(z.read('pack.mcmeta'))['pack']
+            self.assertEqual(pack['pack_format'],15)
+            self.assertNotIn('min_format',pack)
+            self.assertEqual(json.loads(z.read('SOURCE_CONCEPT.json'))['minecraft_target'],'1.20.1')
+
+    def test_unsupported_targets_refused(self):
+        with self.assertRaises(AssertionError):g.make_datapack(self.m,'1.16.5')
+
     def test_reproducible_zip_bytes(self):
         self.assertEqual(g.make_datapack(self.m),g.make_datapack(g.build_model()))
 

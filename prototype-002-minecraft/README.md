@@ -2,13 +2,13 @@
 
 **Source:** [`appliance-prophet-king` / `001-nutoaster-prototype`](https://github.com/the-static-collective/appliance-prophet-king/tree/001-nutoaster-prototype/prototype-001), pinned at commit `a15388ebf2391807559d7cfb334a15c9f3f57992`.
 
-**What this is:** A runnable, inspectable **Minecraft Java 26.1.1** datapack translating the *relationships* in the NuToaster concept into a large-scale block sculpture: two parallel angled removable-trough *symbols*, three stationary heater/structure regions, guide rods, compression setting markers, and a separate duplicate trough used to illustrate removal.
+**What this is:** A runnable, inspectable **Minecraft Java 26.1.1** datapack (with a separate **1.20.1 compatibility export**) translating the *relationships* in the NuToaster concept into a large-scale block sculpture: two parallel angled removable-trough *symbols*, three stationary heater/structure regions, guide rods, compression setting markers, and a separate duplicate trough used to illustrate removal.
 
 **What it is not:** The SVG is an annotated **concept drawing**, with cutaway, cross-section, detail and controls on a single page—not an orthographic CAD drawing, scale-bearing floor plan, wiring layout or mechanical blueprint. Its actual dimensions, tolerances, heating behavior, wall forces and build materials are not established. The model's 45° visual staircase follows the written ~45° hypothesis, **not** an angle measured from the sketch (which contains stylized SVG transformations). One Minecraft block is **not one real meter** in this model.
 
 ## Run
 
-1. Find `dist/NuToaster_001_Minecraft_Concept_Java_26.1.1.zip` (also separately distributed). Put the ZIP **unextracted** in a **new, empty, backed-up** Minecraft Java 26.1.1 creative world's `datapacks/` directory.
+1. Choose your game's version: `dist/NuToaster_001_Minecraft_Concept_Java_26.1.1.zip` is the **official-server-tested** target; `dist/NuToaster_001_Minecraft_Concept_Java_1.20.1.zip` is a **structurally validated compatibility export** intended for older Java 1.20.1 installations but has not been tested against a live 1.20.1 server. Put the matching ZIP **unextracted** into a **new, empty, backed-up** creative world's `datapacks/` directory. The newest Java game is unlikely to run on macOS 10.14 Mojave; the older export may be easier to run on compatible legacy Minecraft installations, but machine compatibility must be checked separately.
 2. Run `/reload` and check `/datapack list`.
 3. Choose a clear origin at least 65 × 41 × 29 blocks with loaded chunks. Example: `/execute positioned 0 90 0 run function nutoaster:build`.
 4. Walk around the twin white/gray troughs and orange **non-heating** fixed structures; the copper display trough is detached and is **not** a third cooking bay.

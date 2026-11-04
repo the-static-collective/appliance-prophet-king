@@ -163,18 +163,25 @@ def manifest(model:VoxelModel):
     }
 
 
-def make_datapack(model:VoxelModel)->bytes:
+def make_datapack(model:VoxelModel,target:str='26.1.1')->bytes:
+    # 1.20.1 uses pack_format=15 and the older plural functions/ directory.
+    # 26.1.1 has min/max format bounds and the singular function/ directory.
+    assert target in ('26.1.1','1.20.1'), 'Unsupported Minecraft version'
+    versioned={'26.1.1':(101,'function'),'1.20.1':(15,'functions')}
+    pf,fd=versioned[target]
+    metadata={'description':'NuToaster experimental concept geometry — not measured CAD'}
+    if target=='1.20.1':metadata['pack_format']=pf
+    else:metadata.update({'min_format':[pf,0],'max_format':[pf,0]})
     m=manifest(model)
+    m['minecraft_target']=target
     bio=io.BytesIO()
     with zipfile.ZipFile(bio,'w',zipfile.ZIP_DEFLATED,compresslevel=9) as z:
-        z.writestr('pack.mcmeta',json.dumps({'pack':{
-          'description':'NuToaster experimental concept geometry — not measured CAD',
-          'min_format':[PACK_FORMAT,0],'max_format':[PACK_FORMAT,0]}},indent=2)+'\n')
-        z.writestr(f'data/{NAMESPACE}/function/build.mcfunction',build_function(model))
+        z.writestr('pack.mcmeta',json.dumps({'pack':metadata},indent=2)+'\n')
+        z.writestr(f'data/{NAMESPACE}/{fd}/build.mcfunction',build_function(model))
         for mode in ('off','low','medium','high'):
-            z.writestr(f'data/{NAMESPACE}/function/press_{mode}.mcfunction',indicator_function(mode))
+            z.writestr(f'data/{NAMESPACE}/{fd}/press_{mode}.mcfunction',indicator_function(mode))
         z.writestr('SOURCE_CONCEPT.json',json.dumps(m,indent=2)+'\n')
-        z.writestr('README.txt',README)
+        z.writestr('README.txt',README.replace('Minecraft Java target: 26.1.1',f'Minecraft Java target: {target}'))
     return bio.getvalue()
 
 README='''NuToaster Minecraft concept carrier — NOT a dimensional blueprint or construction model.\n\nSOURCE: the-static-collective/appliance-prophet-king, branch 001-nutoaster-prototype\nSOURCE DESIGN: two inclined (~45 degrees) removable steel troughs, 3 fixed heater\nwall/divider regions, optional adjustable guided-spring compression, OFF default.\nMODEL: enlarged arbitrary voxel scale, independent active bays and a detached\nremovable-trough *illustration*, orange means SYMBOLIC HEAT, not real heat.\n\nMinecraft Java target: 26.1.1, datapack format 101.\n\n1. Create an EMPTY disposable FLAT creative test world. BACK IT UP.\n2. Put this entire datapack ZIP in that world's datapacks/ directory.\n3. In Minecraft: /reload ; /datapack list\n4. As a fully authorized operator run, in a clear and fully loaded region:\n   /execute positioned 0 90 0 run function nutoaster:build\n5. Look at the twin angled silver troughs, orange outer heater markers, copper\n   middle divider, guide rods, and detached copper-toned removable-trough sample.\n6. Optional color-panel demonstration functions (NO moving pressure walls):\n   /execute positioned 0 90 0 run function nutoaster:press_off\n   /execute positioned 0 90 0 run function nutoaster:press_low\n   /execute positioned 0 90 0 run function nutoaster:press_medium\n   /execute positioned 0 90 0 run function nutoaster:press_high\n   The row of mode markers is at relative X=9,12,15,18 / Y=1 / Z=34.\n7. Do not copy into a valuable world. No automated rollback. Build uses KEEP,\n   mode display changes only four predesignated cells using REPLACE.\n8. Inspect SOURCE_CONCEPT.json for the exact source reference and all nonclaims.\n\nNothing here is a heated appliance, electrical engineering prototype,\nfood-safe prototype, physical force test, mechanical drawing, measured real\ngeometry, or evidence of any real-world fabrication. A Minecraft 45-degree\nstaircase does not establish 45-degree real-life trough angles.\n\nThe appliance-prophet-king source recommends FIRST a cold P0 full-size physical\ntrough to measure mouth, floor, height, length, insertion/removal clearance,\nand travel. That evidence should replace rather than be inferred from pixels.\n'''
@@ -183,13 +190,16 @@ README='''NuToaster Minecraft concept carrier — NOT a dimensional blueprint or
 def write_release(output:Path):
     model=build_model()
     output.mkdir(parents=True,exist_ok=True)
-    datapack=output/'NuToaster_001_Minecraft_Concept_Java_26.1.1.zip'
-    datapack.write_bytes(make_datapack(model))
+    releases={}
+    for target in ('26.1.1','1.20.1'):
+        path=output/('NuToaster_001_Minecraft_Concept_Java_'+target+'.zip')
+        path.write_bytes(make_datapack(model,target))
+        releases[target]={'path':str(path),'sha256':hashlib.sha256(path.read_bytes()).hexdigest()}
     (output/'SOURCE_CONCEPT.json').write_text(json.dumps(manifest(model),indent=2)+'\n',encoding='utf-8')
     (output/'README.txt').write_text(README,encoding='utf-8')
     (output/'nutoaster_build.mcfunction').write_text(build_function(model),encoding='utf-8')
-    print(json.dumps({'datapack':str(datapack),'sha256':hashlib.sha256(datapack.read_bytes()).hexdigest(),
-      'block_count':len(model.blocks),'roles':len(set(model.roles.values())),
+    print(json.dumps({'releases':releases,'block_count':len(model.blocks),
+      'roles':len(set(model.roles.values())),
       'command_count':len(build_function(model).splitlines())-7},indent=2))
 
 if __name__=='__main__':
