@@ -1,0 +1,39 @@
+{
+  "schema": "apk.nutoaster.provisional-p0-dimensions/v1",
+  "title": "NuToaster P0 — Imagined full-size cold-trough dimensions",
+  "provenance": {
+    "source_repo": "the-static-collective/appliance-prophet-king",
+    "source_branch": "001-nutoaster-prototype",
+    "source_commit": "a15388ebf2391807559d7cfb334a15c9f3f57992",
+    "source_svg": "prototype-001/nutoaster-001.svg",
+    "source_status": "qualitative schematic only; none of the seven sizes are supplied in source"
+  },
+  "disposition": "HYPOTHETICAL_UNMEASURED_HOLD",
+  "application": "single cold cardboard trough; 2 bays only in Minecraft rehearsal",
+  "units": "mm",
+  "measurements": {
+    "mouth_inner_width": 140,
+    "floor_inner_width": 118,
+    "wall_vertical_height": 70,
+    "trough_length": 240,
+    "insertion_clearance_each_side": 8,
+    "removal_clearance_along_45deg_axis": 280,
+    "compression_wall_travel_each_side": 10
+  },
+  "source_hypothesis": {"trough_inclination_degrees": 45},
+  "additional_hypotheses": {
+    "center_chassis_divider_thickness_mm": 20,
+    "cold_mockup_material": "cardboard",
+    "compression_is_not_implemented_in_P0": true,
+    "end_capping_and_liquid_containment_are_not_implemented_in_P0": true
+  },
+  "constraints": {
+    "no_heat": true,
+    "no_electricity": true,
+    "not_measured": true,
+    "not_food_safe": true,
+    "no_structural_certification": true,
+    "no_physical_fabrication_authority": true,
+    "human_prototype_measurement_required": true
+  }
+}
